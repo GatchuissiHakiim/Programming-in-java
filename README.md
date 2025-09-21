@@ -152,3 +152,33 @@
 ### Explanation:
 - Contract Between equals() and hashCode():The hashCode() method is used to generate a hash code (an integer) for an object, which is typically used in hash-based collections like HashMap or HashSet.<br>
 The equals() method determines whether two objects are logically equivalent.
+
+## 2) Static members(variables/constants and methods)
+1. 1. Static Variable (Field / Class Member)
+
+       - A variable that belongs to the class, not to any specific object.
+
+       - Shared across all instances of the class.
+
+       - Initialized once when the class is loaded.
+
+       - Can be accessed using the class name or through an object.
+   2. Static Constant
+      - A static variable declared with the final keyword.
+
+      - Its value cannot change after initialization.
+
+      - Used for class-wide constant values.
+
+      - Convention: written in UPPER_CASE.
+   3. Static Method
+      - A method that belongs to the class, not to any specific object.
+
+      - Can be called without creating an instance of the class.
+
+      - Cannot access instance variables or methods directly (can only access static members).
+
+      - Often used for utility or helper methods.
+2. Static constants is often public because they are meant to be accessed globally without needing an instance of the class. Making them public allows other classes to easily reference these constants, promoting code reusability and consistency across the application. Additionally, since static constants are immutable (declared with the final keyword), there is no risk of their values being changed, making it safe to expose them publicly.
+3. Static methods do not have access to instance members (methods and fields) because static methods belong to the class itself rather than to any specific instance of the class. Since instance members are tied to a particular object, they require an instance to be accessed. Static methods, on the other hand, can be called without creating an instance of the class, so they do not have a reference to any specific object and therefore cannot access instance members directly.
+4. A common application of a static method is in utility classes, such as a method to calculate the maximum of two numbers. Static methods are ideal for such tasks because they do not depend on instance-specific data.
