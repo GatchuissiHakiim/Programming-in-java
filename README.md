@@ -158,7 +158,7 @@ The equals() method determines whether two objects are logically equivalent.
 
        - A variable that belongs to the class, not to any specific object.
 
-       - Shared across all instances of the class.
+        - Shared across all instances of the class.
 
        - Initialized once when the class is loaded.
 
@@ -181,4 +181,164 @@ The equals() method determines whether two objects are logically equivalent.
       - Often used for utility or helper methods.
 2. Static constants is often public because they are meant to be accessed globally without needing an instance of the class. Making them public allows other classes to easily reference these constants, promoting code reusability and consistency across the application. Additionally, since static constants are immutable (declared with the final keyword), there is no risk of their values being changed, making it safe to expose them publicly.
 3. Static methods do not have access to instance members (methods and fields) because static methods belong to the class itself rather than to any specific instance of the class. Since instance members are tied to a particular object, they require an instance to be accessed. Static methods, on the other hand, can be called without creating an instance of the class, so they do not have a reference to any specific object and therefore cannot access instance members directly.
-4. A common application of a static method is in utility classes, such as a method to calculate the maximum of two numbers. Static methods are ideal for such tasks because they do not depend on instance-specific data.
+4. A common application of a static method is in utility classes, such as a method to calculate the maximum of two numbers. Static methods are ideal for such tasks because they do not depend on instance-specific data.<br><br><br>
+
+
+# Lab02
+## 1) Final variables,methods and classes
+1. Done 
+2. The benefits of constants in programming is:
+- Ease of Maintenance: Constants provide a single point of definition for values that are used multiple times throughout the code. If a value needs to be changed, it can be updated in one place rather than searching through the entire codebase.
+- Reusability: Constants can be reused across different parts of the program, promoting code reuse and reducing redundancy.
+- Error Prevention: Using constants helps prevent accidental changes to values that should remain constant, reducing the likelihood of bugs and errors in the code.
+- Global Accessibility: Constants can be declared as public static final, making them accessible from anywhere in the program without needing to create an instance of the class.
+3. The use of "final" in the following is: 
+- Local variable: A local variable declared as final cannot be reassigned after it has been initialized. 
+- Instance variable: An instance variable declared as final must be initialized when it is declared or in the constructor, and cannot be changed afterward.
+- static constant: A static constant declared as final is a class-level variable that cannot be changed after it has been initialized. It is typically used for values that are meant to be constant and shared across all instances of the class.
+- Method : A method declared as final cannot be overridden by subclasses. 
+- Class: A class declared as final cannot be subclassed or extended.
+4. - NO, because the fields can be declared with mutable classes so even if private, it does not guarantee its final state.
+- Yes, since all the fields are declare private with primitive type, the absence of setters, making the class final and initializing all the fields through the constructor.
+5. The class is not immutable because the private field "values" is not declare with primitive type so it can be modified after the object is created(An array is mutable and actually the getter returns an array).
+6. NEED TO DO
+
+## 2) Enumeration classes
+
+1. Done
+2. Done
+3. The code is actually correct, but it is not Thread-safe because if more than one thread access the getValue() method aat the same time it can lead to an inconsistent result.
+4. NEED TO DO
+
+## 3) Nested Classes
+1. DONE
+2. 
+|Concept|Static Nested Class|Inner Class|local classes|Anonymous classes|
+|-------|------------------|-----------|-------------|------------------|
+|declaration|Declared static within another class|Declared non-static within another class|Declared within a method or a block|Declared and instantiated in a single expression|
+|Access to outer class members|Can access static members of the outer class directly|Can access both static and instance members of the outer class|Can access both static and instance members of the outer class|Can access both static and instance members of the outer class|
+|Instantiation|Can be instantiated without an instance of the outer class|Requires an instance of the outer class to be instantiated|Can be instantiated only within the method or block where it is defined|Cannot have a constructor, instantiated at the point of declaration|
+|can have static members|Yes|No|No|No|
+|Use cases|Used for grouping related classes that are only used in one place, or for creating utility classes|Used when the inner class needs to access instance members of the outer class|Used for defining a class that is only relevant within a specific method or block|Used for implementing interfaces or extending classes in a concise way, often for event handling or callbacks|
+3. - Yes, an inner class can be used in a class other than the class in which it is nested, but it requires an instance of the outer class to be instantiated first.
+- Not in local class.
+4. NEED TO DO
+
+## 4) Abstract Data Types and Interfaces
+1. DONE. It is a type that is is define just as the level of behavior from the point of view of a user of the data type. It is defined by its behavior (semantics) from the point of view of a user, of the data, specifically in terms of possible values, possible operations on data of this type, and the behavior of these operations.
+2. The main difference between an abstract class and an interface in Java is that An abstract class defines a base with shared state and behavior (single inheritance). While an interface defines a contract for behavior that can be implemented by any class (multiple inheritance).
+3. The members of java interface are: 
+-  Abstract methods
+- Default methods
+- Static methods 
+- Private methods 
+- Constants.
+4. The correct ones are :
+````java
+abstract class D {protected  void m1();}
+abstract class E { abstract void m1();}
+````
+5. The correct one is:
+````java
+interface D { void m1(); }
+````
+6. A-->interface<br>C-->class<br>D-->C(So an object from D is an instance of C)<br>B-->D(So an object from B is an instance of D and C)<br>B->implements A(So an object from B is an instance of A too)<br>Therefor so an object from B is an instance of A, B, C and D.<br>
+### Output:
+````java
+True
+True
+````
+## 5) Functional Interfaces and Lambda Expressions
+1. Done, A functional interface is an interface that contains exactly one abstract method. They can have multiple default or static methods, but only one abstract method. While  a lambda expression is a concise way to represent an instance of a functional interface using an expression. It provides a clear and concise way to implement the single abstract method of the functional interface without the need for a separate class.
+2. The relationship between functional interface and lambda expression is that a lambda expression is used to provide the implementation of the single abstract method defined in a functional interface. When a lambda expression is assigned to a variable of a functional interface type, it effectively creates an instance of that functional interface with the behavior defined by the lambda expression.
+3. ```java
+   @FunctionalInterface
+    public interface VoidToInt {
+    int apply();
+    }
+    @FunctionalInterface
+    public interface IntToVoid {
+    void apply(int x);
+    }
+    
+    @FunctionalInterface
+    public interface IntToInt {
+    int apply(int x);
+    }
+    
+    @FunctionalInterface
+    public interface IntIntToVoid {
+    void apply(int x, int y);
+    }
+
+    ```
+   ```java
+   public class AnonymousClassImplementations {
+    public static void main(String[] args) {
+     
+        VoidToInt voidToInt = new VoidToInt() {
+            @Override
+            public int apply() {
+                return 42;
+            }
+        };
+
+    
+        IntToVoid intToVoid = new IntToVoid() {
+            @Override
+            public void apply(int x) {
+                System.out.println("Received: " + x);
+            }
+        };
+
+       
+        IntToInt intToInt = new IntToInt() {
+            @Override
+            public int apply(int x) {
+                return x * x;
+            }
+        };
+
+      
+        IntIntToVoid intIntToVoid = new IntIntToVoid() {
+            @Override
+            public void apply(int x, int y) {
+                System.out.println("Sum: " + (x + y));
+            }
+        };
+
+      
+        System.out.println(voidToInt.apply());
+        intToVoid.apply(10);
+        System.out.println(intToInt.apply(5));
+        intIntToVoid.apply(3, 7);
+    }
+    }
+    ```
+   ```java
+   public class LambdaImplementations {
+    public static void main(String[] args) {
+      
+        VoidToInt voidToInt = () -> 42;
+
+    
+        IntToVoid intToVoid = x -> System.out.println("Received: " + x);
+
+       
+        IntToInt intToInt = x -> x * x;
+
+        
+        IntIntToVoid intIntToVoid = (x, y) -> System.out.println("Sum: " + (x + y));
+
+   
+        System.out.println(voidToInt.apply());
+        intToVoid.apply(10);
+        System.out.println(intToInt.apply(5));
+        intIntToVoid.apply(3, 7);
+    }
+    }
+    ```
+
+
+
+
